@@ -4,6 +4,7 @@ Module contaning the functions to visualize the
 wines distribution using a subset data
 """
 
+import os
 import sys
 import datetime
 
@@ -52,7 +53,16 @@ def plot_distribution(wine):
 
     fname = f'figures/fig01_distribution-wine-scores.png'
 
-    fig.savefig(fname, bbox_inches = 'tight')
+    try:
+        # try to save the figure
+        fig.savefig(fname, bbox_inches = 'tight')
+    except OSError as e:
+        # wowza! the directory does not exist
+        os.makedirs('figures')
+        print('Creating figures directory')
+        fig.savefig(fname, bbox_inches='tight')
+    
+    #fig.savefig(fname, bbox_inches = 'tight')
     return (fname)
 
 
@@ -66,7 +76,17 @@ def plot_scatter(wine):
     ax.set_xlabel('Points')
 
     fname = f'figures/fig02_scatter-points-vs-price.png'
-    fig.savefig(fname, bbox_inches = 'tight')
+    
+    try:
+        # try to save the figure
+        fig.savefig(fname, bbox_inches = 'tight')
+    except OSError as e:
+        # wowza! the directory does not exist
+        os.makedirs('figures')
+        print('Creating figures directory')
+        fig.savefig(fname, bbox_inches='tight')
+        
+    #fig.savefig(fname, bbox_inches = 'tight')
     return (fname)
 
 
